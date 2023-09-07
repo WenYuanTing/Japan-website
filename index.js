@@ -15,6 +15,7 @@ const flash = require("connect-flash");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const notifier = require("node-notifier");
+const port = process.env.PORT || 8080;
 function handleEmailSentSuccess() {
   // 使用 node-notifier 顯示通知
   notifier.notify({
@@ -23,7 +24,7 @@ function handleEmailSentSuccess() {
   });
 }
 mongoose
-  .connect("mongodb://127.0.0.1:27017/JapanTravelDB")
+  .connect(process.env.MONGODB_CONNECTION)
   .then(() => {
     console.log("成功連接到JapanTravelDB...");
   })
@@ -442,6 +443,6 @@ app.post(
   }
 );
 
-app.listen(8080, () => {
+app.listen(port, () => {
   console.log("伺服器正在 port 8080 上面運行...");
 });
