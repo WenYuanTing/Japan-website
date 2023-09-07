@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./style3/style.css" />
+    <title>日本旅遊推薦-預約行程</title>
+  </head>
+  <body>
+    <img
+      class="fixed-image"
+      src="./images/istockphoto-1131743616-1024x1024.jpg"
+      alt="fixed-image"
+    />
+    <div class="fliter"></div>
+    <header>
+      <section class="top">
+        <img src="./images/logo.jpg" alt="日本旅遊網Logo" />
+        <h1>2023日本旅遊推薦</h1>
+      </section>
+
+      <nav>
+        <ul>
+          <% if (isAuthenticated) { %>
+          <li style="color: rgb(10, 163, 229); font-size: 1.25rem">
+            <%= user.name %>，歡迎回來!!
+          </li>
+          <% } %>
+          <li>
+            <a href="/"><i class="fa-solid fa-plane"></i> 日本旅遊</a>
+          </li>
+          <% if (!isAuthenticated) { %>
+          <li>
+            <a href="./login"
+              ><i class="fa-solid fa-right-to-bracket"></i> 會員登入</a
+            >
+          </li>
+          <% } %><% if (isAuthenticated) { %>
+          <li>
+            <a href="#"><i class="fa-solid fa-book"></i> 預約行程</a>
+          </li>
+          <li>
+            <a href="./booked-travel"
+              ><i class="fa-solid fa-bookmark"></i> 目前行程</a
+            >
+          </li>
+          <% } %>
+          <li>
+            <a href="./contact-us"
+              ><i class="fa-regular fa-address-book"></i> 聯絡我們</a
+            >
+          </li>
+          <% if (isAuthenticated) { %>
+          <li>
+            <a href="/logout"
+              ><i class="fa-solid fa-right-to-bracket"></i> 登出</a
+            >
+          </li>
+          <% } %>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2>現在就開始預約行程吧!!!</h2>
+      <form action="/book-a-travel" method="POST">
+        <div class="book-a-travel">
+          <div class="book-left">
+            <div class="book-item">
+              <div class="book-name">出遊人數<sup>*</sup></div>
+              <div><input type="number" min="0" name="people" required /></div>
+            </div>
+
+            <div class="book-item">
+              <div class="book-name">出發日期<sup>*</sup></div>
+              <div><input type="date" name="departDate" required /></div>
+            </div>
+            <div class="book-item">
+              <div class="book-name">歸來日期<sup>*</sup></div>
+              <div><input type="date" name="comebackDate" required /></div>
+            </div>
+            <div class="book-item">
+              <div class="book-name">航空公司<sup>*</sup></div>
+              <div>
+                <select id="" name="airline" required>
+                  <option value=""></option>
+                  <option value="EVA">長榮</option>
+                  <option value="Tiger">虎航</option>
+                  <option value="China">華航</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="book-right">
+            <div class="book-item">
+              <div class="book-name">旅遊地點<sup>*</sup></div>
+              <div>
+                <select id="" name="destination" required>
+                  <option value=""></option>
+                  <option value="Hokkaido">北海道</option>
+                  <option value="Tokyo">東京</option>
+                  <option value="Kyoto">京都</option>
+                  <option value="Osaka">大阪</option>
+                </select>
+              </div>
+            </div>
+            <div class="book-item">
+              <div class="book-name">想去的景點</div>
+              <div><input type="text" name="location" /></div>
+            </div>
+            <div class="book-item">
+              <div class="book-name">連絡電話<sup>*</sup></div>
+              <div><input type="text" name="phoneNumber" required /></div>
+            </div>
+            <div class="book-item">
+              <div>
+                <label class="book-name">旅遊預算<sup>*</sup></label>
+              </div>
+              <div>
+                <select name="budget" id="" required>
+                  <option value="0"></option>
+
+                  <option value="10000">10,000元以下</option>
+                  <option value="20000">10,000-20,000</option>
+                  <option value="40000">20,000-40,000</option>
+                  <option value="60000">40,000-60,000</option>
+                  <option value="80000">60,000-80,000</option>
+                  <option value="80000up">80,000以上</option>
+                </select>
+                <label for="">元/人</label>
+
+                <div>
+                  <input type="radio" name="check" value="含" required />含
+                  <input type="radio" name="check" value="不含" required />不含
+                  <label for="">簽證、機場稅與兵檢</label>
+                </div>
+                <div>
+                  <input type="radio" name="pickup" value="含" required />含
+                  <input type="radio" name="pickup" value="不含" required />不含
+                  <label for="">機場接送</label>
+                </div>
+                <div>
+                  <input type="radio" name="tips" value="含" required />含
+                  <input type="radio" name="tips" value="不含" required />不含
+                  <label for="">含領隊導遊司機小費</label>
+                </div>
+              </div>
+            </div>
+            <div><button class="book-item" type="submit">送出</button></div>
+          </div>
+        </div>
+      </form>
+    </main>
+
+    <footer>
+      <section class="footer">
+        <div class="pic">
+          <img src="./images/logo.jpg" alt="網站Logo" />
+          <p>2023日本旅遊推薦</p>
+        </div>
+        <div class="con">
+          <a href=""><img src="./Icons/facebook.svg" alt="facebook" /></a>
+          <a href=""><img src="./Icons/instagram.svg" alt="instagram" /></a>
+          <a href=""><img src="./Icons/twitter.svg" alt="twitter" /></a>
+          <a href=""><img src="./Icons/youtube.svg" alt="youtube" /></a>
+        </div>
+      </section>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-Hants">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./style5/style.css" />
+    <title>日本旅遊推薦</title>
+  </head>
+  <body>
+    <img class="fixed-image" src="./images/20230821.jpg" alt="fixed-image" />
+
+    <header>
+      <section class="top">
+        <img src="./images/logo.jpg" alt="日本旅遊網Logo" />
+        <h1>2023日本旅遊推薦</h1>
+      </section>
+
+      <nav>
+        <ul>
+          <% if (isAuthenticated) { %>
+          <li style="color: rgb(10, 163, 229); font-size: 1.25rem">
+            <%= user.name %>，歡迎回來!!
+          </li>
+          <% } %>
+          <li>
+            <a href="/"><i class="fa-solid fa-plane"></i> 日本旅遊</a>
+          </li>
+          <% if (!isAuthenticated) { %>
+          <li>
+            <a href="./login"
+              ><i class="fa-solid fa-right-to-bracket"></i> 會員登入</a
+            >
+          </li>
+          <% } %> <% if (isAuthenticated) { %>
+
+          <li>
+            <a href="./book-a-travel"
+              ><i class="fa-solid fa-book"></i> 預約行程</a
+            >
+          </li>
+          <li>
+            <a href="#"><i class="fa-solid fa-bookmark"></i> 目前行程</a>
+          </li>
+          <% } %>
+          <li>
+            <a href="./contact-us"
+              ><i class="fa-regular fa-address-book"></i> 聯絡我們</a
+            >
+          </li>
+          <% if (isAuthenticated) { %>
+          <li>
+            <a href="/logout"
+              ><i class="fa-solid fa-right-to-bracket"></i> 登出</a
+            >
+          </li>
+          <% } %>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="travels">
+        <% for (let i = 0; i < travels.length; i++) { %>
+
+        <div class="traveled-backgound">
+          <h2>目前第<%=i+1%>個行程!!!</h2>
+
+          <p>出遊人數 : <%= travels[i].people%></p>
+
+          <p>
+            出遊日期 : <%= travels[i].departDate.toISOString().split("T")[0] %>
+          </p>
+
+          <p>
+            歸來日期 : <%= travels[i].comebackDate.toISOString().split("T")[0]
+            %>
+          </p>
+
+          <p>航空公司 : <%= travels[i].airline%></p>
+
+          <p>旅遊地點 : <%= travels[i].destination%></p>
+
+          <p>遊玩景點 : <%= travels[i].location%></p>
+
+          <p>連絡電話 : <%= travels[i].phoneNumber%></p>
+
+          <p>預算 : <%= travels[i].budget%></p>
+
+          <p>簽證、機場稅與兵檢 : <%= travels[i].check%></p>
+
+          <p>機場接送 : <%= travels[i].pickup%></p>
+
+          <p>含領隊導遊司機小費 : <%= travels[i].tips%></p>
+
+          <p class="date">
+            預約日期 : <%= travels[i].date.toISOString().split("T")[0]%>
+          </p>
+        </div>
+        <% } %>
+      </section>
+    </main>
+
+    <footer>
+      <section class="footer">
+        <div class="pic">
+          <img src="./images/logo.jpg" alt="網站Logo" />
+          <p>2023日本旅遊推薦</p>
+        </div>
+        <div class="con">
+          <a href=""><img src="./Icons/facebook.svg" alt="facebook" /></a>
+          <a href=""><img src="./Icons/instagram.svg" alt="instagram" /></a>
+          <a href=""><img src="./Icons/twitter.svg" alt="twitter" /></a>
+          <a href=""><img src="./Icons/youtube.svg" alt="youtube" /></a>
+        </div>
+      </section>
+    </footer>
+
+    <script>
+      setInterval(() => {
+        let topBackground = document.querySelector("section.Info1");
+        if (
+          topBackground.style.backgroundImage == 'url("../images/日本櫻花.jpg")'
+        ) {
+          topBackground.style.backgroundImage = 'url("../images/京都古城.jpg")';
+        } else if (
+          topBackground.style.backgroundImage == 'url("../images/京都古城.jpg")'
+        ) {
+          topBackground.style.backgroundImage = 'url("../images/大阪街頭.jpg")';
+        } else {
+          topBackground.style.backgroundImage = 'url("../images/日本櫻花.jpg")';
+        }
+      }, 3000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="./style2/style.css" />
+    <title>日本旅遊推薦-聯絡我們</title>
+  </head>
+  <body>
+    <img
+      class="fixed-image"
+      src="./images/pexels-邱-韬-356269.jpg"
+      alt="fixed-image"
+    />
+    <div class="fliter"></div>
+    <header>
+      <section class="top">
+        <img src="./images/logo.jpg" alt="日本旅遊網Logo" />
+        <h1>2023日本旅遊推薦</h1>
+      </section>
+
+      <nav>
+        <ul>
+          <% if (isAuthenticated) { %>
+          <li style="color: rgb(35, 116, 116); font-size: 1.25rem">
+            <%= user.name %>，歡迎回來!!
+          </li>
+          <% } %>
+          <li>
+            <a href="/"><i class="fa-solid fa-plane"></i> 日本旅遊</a>
+          </li>
+          <% if (!isAuthenticated) { %>
+          <li>
+            <a href="./login"
+              ><i class="fa-solid fa-right-to-bracket"></i> 會員登入</a
+            >
+          </li>
+          <% } %><% if (isAuthenticated) { %>
+          <li>
+            <a href="./book-a-travel"
+              ><i class="fa-solid fa-book"></i> 預約行程</a
+            >
+          </li>
+          <li>
+            <a href="./booked-travel"
+              ><i class="fa-solid fa-bookmark"></i> 目前行程</a
+            >
+          </li>
+          <% } %>
+          <li>
+            <a href="#"><i class="fa-regular fa-address-book"></i> 聯絡我們</a>
+          </li>
+          <% if (isAuthenticated) { %>
+          <li>
+            <a href="/logout"
+              ><i class="fa-solid fa-right-to-bracket"></i> 登出</a
+            >
+          </li>
+          <% } %>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="feedback">
+        <ul>
+          <li>
+            <a href="#" id="feedbackForm"
+              ><i class="fa-solid fa-comment"></i>意見回饋</a
+            >
+          </li>
+          <li>
+            <a href="#" id="groupPlan"
+              ><i class="fa-solid fa-shapes"></i>團體規劃</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <form action="/submit-to-email" method="POST">
+        <div id="form1" class="feedback-container">
+          <div class="feedback-left">
+            <div class="feedback-item">
+              <div>
+                <label class="feedback-name">意見類別<sup>*</sup></label>
+              </div>
+              <div>
+                <select class="select-list" name="category" required>
+                  <option value="旅遊諮詢" selected="">旅遊諮詢</option>
+                  <option value="訂單聯絡">訂單聯絡</option>
+                  <option value="網頁系統">網頁系統</option>
+                  <option value="洽談合作">洽談合作</option>
+                  <option value="服務建議">服務建議</option>
+                </select>
+              </div>
+            </div>
+            <div class="feedback-item">
+              <div>
+                <label class="feedback-name">姓　　名<sup>*</sup></label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="請輸入聯絡人姓名"
+                  name="name"
+                  required
+                />
+              </div>
+            </div>
+            <div class="feedback-item">
+              <div>
+                <label class="feedback-name">聯絡電話<sup>*</sup></label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="請輸入聯絡手機"
+                  name="phoneNumber"
+                  required
+                />
+              </div>
+            </div>
+            <div class="feedback-item">
+              <div>
+                <label class="feedback-name">電子信箱<sup>*</sup></label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="請輸入電子信箱"
+                  name="email"
+                  required
+                />
+              </div>
+            </div>
+            <div class="feedback-item">
+              <div>
+                <label class="feedback-name order-number">訂單編號</label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="請輸入訂單編號"
+                  name="orderNumber"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="feedback-right">
+            <div>
+              <textarea
+                name="suggess"
+                id=""
+                cols="50"
+                rows="15"
+                placeholder="請輸入您的建議與意見(最多500字)"
+              ></textarea>
+            </div>
+            <div><button>送出訊息</button></div>
+          </div>
+        </div>
+      </form>
+      <form action="/submit-to-email2" method="POST">
+        <div id="form2" class="groupPlan-container">
+          <div class="groupPlan-left">
+            <div class="groupPlan-item">
+              <div>
+                <label for="" class="gruopPlan-name add-space">公司名稱</label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="非公司行號或學校團體則無需填寫"
+                  name="company"
+                />
+              </div>
+            </div>
+            <div class="groupPlan-item">
+              <div>
+                <label for="" class="gruopPlan-name"
+                  >姓　　名<sup>*</sup></label
+                >
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="請輸入聯絡人姓名"
+                  name="name"
+                  required
+                />
+              </div>
+            </div>
+            <div class="groupPlan-item">
+              <div>
+                <label for="" class="gruopPlan-name add-space">市　　話</label>
+              </div>
+              <div>
+                <select name="phone" id="">
+                  <option value="0" selected="">02</option>
+                  <option value="1">03</option>
+                  <option value="2">04</option>
+                  <option value="3">05</option>
+                  <option value="4">06</option>
+                </select>
+              </div>
+              <div>
+                <input type="text" placeholder="請輸入連絡電話" name="Number" />
+              </div>
+            </div>
+            <div class="groupPlan-item">
+              <div>
+                <label for="" class="gruopPlan-name"
+                  >手　　機<sup>*</sup></label
+                >
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="請輸入連絡手機"
+                  name="phoneNumber"
+                  required
+                />
+              </div>
+
+              <div></div>
+            </div>
+            <div class="groupPlan-item">
+              <div>
+                <label class="gruopPlan-name">電子信箱<sup>*</sup></label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="請輸入電子信箱"
+                  name="email"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="groupPlan-right">
+            <div class="groupPlan-item">
+              <div>
+                <label for="" class="gruopPlan-name"
+                  >旅遊主題<sup>*</sup></label
+                >
+              </div>
+              <div class="topics">
+                <select name="topics" id="" required>
+                  <option value="一般旅遊團">一般旅遊團</option>
+                  <option value="商務考察">商務考察</option>
+                  <option value="學生/畢業旅行">學生/畢業旅行</option>
+                  <option value="高爾夫球團">高爾夫球團</option>
+                  <option value="其他">其他</option>
+                </select>
+              </div>
+            </div>
+            <div class="groupPlan-item">
+              <div>
+                <label for="" class="gruopPlan-name"
+                  >出發日期<sup>*</sup></label
+                >
+              </div>
+              <div>
+                <input type="date" name="departDate" required />
+              </div>
+            </div>
+
+            <div class="groupPlan-item">
+              <div>
+                <label for="" class="gruopPlan-name"
+                  >旅遊類型<sup>*</sup></label
+                >
+              </div>
+              <div>
+                <select name="kind" id="" required>
+                  <option value="國外旅遊">國外旅遊</option>
+                  <option value="國內旅遊">國內旅遊</option>
+                  <option value="自由行">自由行</option>
+                </select>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="days"
+                  id=""
+                  min="0"
+                  placeholder="請輸入旅遊天數"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="groupPlan-item">
+              <div>
+                <label for="" class="gruopPlan-name"
+                  >旅遊地點<sup>*</sup></label
+                >
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="destination"
+                  id=""
+                  placeholder="請填寫目的地"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="groupPlan-item">
+              <div>
+                <label for="" class="gruopPlan-name"
+                  >旅遊人數<sup>*</sup></label
+                >
+              </div>
+              <div>
+                <input
+                  type="number"
+                  name="people"
+                  id=""
+                  min="1"
+                  placeholder="請選擇人數"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="groupPlan-item">
+              <div>
+                <label for="" class="gruopPlan-name"
+                  >旅遊預算<sup>*</sup></label
+                >
+              </div>
+              <div>
+                <select name="budget" id="" required>
+                  <option value="0"></option>
+
+                  <option value="10,000">10,000元以下</option>
+                  <option value="20,000">10,000-20,000</option>
+                  <option value="40,000">20,000-40,000</option>
+                  <option value="60,000">40,000-60,000</option>
+                  <option value="80,000">60,000-80,000</option>
+                  <option value="80,001">80,000以上</option>
+                </select>
+                <label for="">元/人</label>
+
+                <div>
+                  <input type="radio" name="check" value="含" required />含
+                  <input type="radio" name="check" value="不含" required />不含
+                  <label for="">簽證、機場稅與兵檢</label>
+                </div>
+                <div>
+                  <input type="radio" name="pickup" value="含" required />含
+                  <input type="radio" name="pickup" value="不含" required />不含
+                  <label for="">機場接送</label>
+                </div>
+                <div>
+                  <input type="radio" name="tips" value="含" required />含
+                  <input type="radio" name="tips" value="不含" required />不含
+                  <label for="">含領隊導遊司機小費</label>
+                </div>
+              </div>
+            </div>
+            <button>送出訊息</button>
+          </div>
+        </div>
+      </form>
+    </main>
+    <footer>
+      <section class="footer">
+        <div class="pic">
+          <img src="./images/logo.jpg" alt="網站Logo" />
+          <p>2023日本旅遊推薦</p>
+        </div>
+        <div class="con">
+          <a href=""><img src="./Icons/facebook.svg" alt="facebook" /></a>
+          <a href=""><img src="./Icons/instagram.svg" alt="instagram" /></a>
+          <a href=""><img src="./Icons/twitter.svg" alt="twitter" /></a>
+          <a href=""><img src="./Icons/youtube.svg" alt="youtube" /></a>
+        </div>
+      </section>
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
